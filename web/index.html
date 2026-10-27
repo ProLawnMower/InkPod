@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>iPod · E-Ink</title>
+  <link rel="stylesheet" href="assets/app.css">
+  <script src="assets/vendor/jsmediatags.min.js" defer></script>
+</head>
+<body>
+  <!-- Full-screen iPod (no bars; everything lives in Settings, opened with the Back key) -->
+  <main id="stage">
+    <div id="ipod-fit">
+      <div id="ipod-mount"></div>
+    </div>
+  </main>
+
+  <!-- Transient toast (auto-hides) -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Settings (the only entry point) -->
+  <div id="overlay-settings" class="overlay hidden" role="dialog" aria-label="Settings">
+    <div class="sheet">
+      <div class="sheet-head">
+        <h2>Settings</h2>
+        <button id="btn-close-settings" type="button" class="icon-btn">✕</button>
+      </div>
+
+      <details open>
+        <summary>Mode</summary>
+        <div class="row" id="mode-tabs">
+          <button data-mode="guest" type="button">Guest</button>
+          <button data-mode="local" type="button">Local</button>
+          <button data-mode="applemusic" type="button" title="Experimental">Apple&nbsp;Music</button>
+        </div>
+        <p class="muted small" id="mode-desc"></p>
+      </details>
+
+      <details>
+        <summary>Guest (built-in library · 30s previews)</summary>
+        <div class="row">
+          <span>Storefront:</span>
+          <button id="sf-cn" type="button" class="chip">China</button>
+          <button id="sf-us" type="button" class="chip">US</button>
+        </div>
+        <div class="row">
+          <button id="btn-search" type="button">Search catalog &amp; add to iPod</button>
+        </div>
+        <p class="muted small">The same library Apple shipped with the iPod easter egg (2001/2000s hits + "Songs From iPod Ads").</p>
+      </details>
+
+      <details>
+        <summary>Local Music (offline, full tracks)</summary>
+        <div class="row">
+          <button id="btn-scan" type="button">Scan /sdcard/Music</button>
+          <button id="btn-forget-folder" type="button">Forget folder</button>
+        </div>
+        <div class="row">
+          <button id="btn-fav-current" type="button">★ Favorite current track</button>
+          <span id="local-scan-status" class="muted small">Not scanned</span>
+        </div>
+        <p class="muted small">Fixed library folder: <b>/sdcard/Music</b> (subfolders included). MP3 / M4A / FLAC / OGG / WAV. ID3 tags are read automatically, artists grouped, .m3u playlists imported. First scan asks for storage permission.</p>
+      </details>
+
+      <details>
+        <summary>Apple Music (experimental)</summary>
+        <div class="row">
+          <input id="am-token" type="password" placeholder="MusicKit developer token (JWT)" autocomplete="off">
+        </div>
+        <div class="row">
+          <button id="btn-am-login" type="button">Sign in &amp; sync library</button>
+          <button id="btn-am-logout" type="button">Sign out</button>
+          <span id="am-status" class="muted small">Not signed in</span>
+        </div>
+        <p class="muted small">Needs an Apple Developer token (see README). Full playback requires an Apple Music subscription; falls back to 30s previews otherwise.</p>
+      </details>
+
+      <details>
+        <summary>Appearance</summary>
+        <div class="row radios">
+          <label><input type="radio" name="flavor" id="flavor-eink"> E-Ink 1-bit (no chassis · no backlight)</label>
+          <label><input type="radio" name="flavor" id="flavor-original"> Original (full chassis · backlight)</label>
+        </div>
+        <p class="muted small">Switching appearance reloads the page.</p>
+      </details>
+
+      <details>
+        <summary>How to use</summary>
+        <ul class="small">
+          <li>Wheel: drag the inner ring to scroll (adjusts volume on Now Playing); outer band = Menu / Back / Forward / Play-Pause; center = Select</li>
+          <li><b>E-Ink tip</b>: on lists, <b>tap the inner ring</b> to step the selection — upper half = up, lower half = down (dragging still scrolls); the outer buttons keep their original functions</li>
+          <li>Keyboard (desktop): ↑↓ navigate, Enter select, Esc back/settings</li>
+          <li>Hold Menu: toggle backlight (Original mode only)</li>
+          <li>Settings → About → hold Select for 5s: unlock Brick</li>
+          <li><b>Press the Back key anytime to open Settings</b></li>
+        </ul>
+      </details>
+
+      <div class="row sheet-foot">
+        <span class="muted small">v1.0 · iPod E-Ink</span>
+        <button id="btn-exit" type="button">Exit app</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search panel (guest mode, opened from Settings) -->
+  <div id="overlay-search" class="overlay hidden" role="dialog" aria-label="Search">
+    <div class="sheet">
+      <div class="sheet-head">
+        <h2>Search Apple Music catalog</h2>
+        <button id="btn-close-search" type="button" class="icon-btn">✕</button>
+      </div>
+      <div class="row">
+        <input id="search-input" type="search" placeholder="Song / artist…" autocomplete="off">
+        <button id="btn-run-search" type="button">Search</button>
+      </div>
+      <div id="search-results"></div>
+      <p class="muted small">Results are 30s previews; tap "Add" to load them into the iPod's "Search Picks" playlist.</p>
+    </div>
+  </div>
+
+  <script type="module" src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "appId": "com.prolawnmower.InkPod",
+  "appName": "iPod 墨水屏",
+  "webDir": "web",
+  "android": {
+    "backgroundColor": "#ffffff"
+  }
+}

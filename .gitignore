@@ -1,0 +1,21 @@
+node_modules/
+android/.gradle/
+android/app/build/
+android/build/
+android/capacitor-cordova-android-plugins/build/
+android/local.properties/
+android/variables-local.gradle
+dist/
+*.log
+.DS_Store
+
+# 签名密钥绝不入库
+android/ipod-eink.keystore
+android/keystore.properties
+
+# Apple 的组件与数据由 tools/fetch-assets.sh 构建时拉取（不入库）
+web/assets/vendor/web-music-ipod.esm.js
+web/assets/vendor/web-music-ipod.eink.esm.js
+web/assets/vendor/jsmediatags.min.js
+web/data/cn.json
+web/data/us.json
