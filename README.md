@@ -4,6 +4,18 @@ An e-ink music player for Android that resurrects the iPod — built around the 
 
 The interface, Chicago-style bitmap font, click-wheel physics, clicker sound, and even the hidden Brick game are pixel-faithful to the original, because it *is* the original component — self-hosted and fed with your own music.
 
+## Screenshots
+
+Captured on a 552×768 e-ink reader (the target device):
+
+| Main menu | Albums | Album tracks |
+|:---:|:---:|:---:|
+| ![Main menu](screenshots/01-main-menu.png) | ![Albums](screenshots/02-albums.png) | ![Album tracks](screenshots/03-album-tracks.png) |
+
+| Now Playing | iPod Settings (+ App Settings entry) | Brick (hold Select on About for 5s) |
+|:---:|:---:|:---:|
+| ![Now Playing](screenshots/04-now-playing.png) | ![Settings](screenshots/05-settings.png) | ![Brick](screenshots/06-brick.png) |
+
 ## Highlights
 
 - **Faithful iPod UI** — Apple's own `web-music-ipod` component, served unmodified (an optional patched variant removes the backlight entry and adds an Albums menu)
